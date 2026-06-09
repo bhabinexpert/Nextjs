@@ -1,15 +1,13 @@
 import { getNotes } from "../services/notes"
-import NoteList from "../notelist";
+import NoteList from "../notelist"
 
-const Notes = ()=>{
-    const notes = getNotes();
-    return(
-        <div>
-            <h2>
-                Notes
-            </h2>
-          <NoteList notes={notes} />
-        </div>
-    )
+const Notes = async ({ searchParams }: { searchParams: Promise<{ important?: string }> }) => {
+  const { important } = await searchParams
+  const showImportant = important === "true"
+
+  const notes = await getNotes(showImportant)
+
+  return <NoteList notes={notes} />
 }
+
 export default Notes

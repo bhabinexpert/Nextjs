@@ -1,27 +1,31 @@
-import { createNote } from "@/app/actions/notes";
+import { createNote } from "../../actions/notes"
 
-const NewNote = () => {
-    return(
+export default function NewNotePage() {
+  return (
+    <div style={{ padding: 24 }}>
+      <h1>New Note</h1>
+      <form action={createNote}>
         <div>
-            <h2>
-                Create a new Note!!
-            </h2>
-            <form action={createNote}>
-                <div>
-                    <label>
-                        Content:
-                        <input type="text" name = "content" required />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                    <input type="checkbox" name ="important" />
-                    Important
-                    </label>
-                </div>
-                <button type="submit">Create</button>
-            </form>
+          <label htmlFor="content">Content</label>
+          <br />
+          <textarea
+            id="content"
+            name="content"
+            rows={5}
+            style={{ width: "100%", maxWidth: 480 }}
+            placeholder="Write your note here"
+            required
+          />
         </div>
-    )
+        <div style={{ marginTop: 12 }}>
+          <label>
+            <input type="checkbox" name="important" /> Important
+          </label>
+        </div>
+        <div style={{ marginTop: 12 }}>
+          <button type="submit">Create note</button>
+        </div>
+      </form>
+    </div>
+  )
 }
-export default NewNote;
