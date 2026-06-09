@@ -4,8 +4,14 @@
 import { revalidatePath } from "next/cache";
 import { addNote, toggleImportance } from "../services/notes";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 export const createNote = async (formData: FormData) => {
+  const session = await auth()
+  if (!session) {
+    redirect("/login")
+  }
+
   const rawContent = formData.get("content")
   if (typeof rawContent !== "string") {
     return
